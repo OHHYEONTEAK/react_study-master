@@ -1,6 +1,7 @@
 import React from 'react';
 
 function ArrayAdd({username, email, onInputChange, onCreateClick}){
+  console.log("ArrayAdd component! - input, button")
 
   return(
     <div>
@@ -24,4 +25,4 @@ function ArrayAdd({username, email, onInputChange, onCreateClick}){
   )
 }
 
-export default ArrayAdd;
+export default React.memo(ArrayAdd);

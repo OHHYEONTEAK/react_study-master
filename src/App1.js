@@ -1,19 +1,3 @@
-
-//예제 : X, O 게임 구현
-
-import React from 'react';
-import Game from './game';
-
-function App(){
-
-  return(
-    <Game/>
-  )
-}
-
-export default App;
-
-
 // import React from "react";
 // import ReducerCounter from "./ReducerCounter";
 
@@ -35,23 +19,38 @@ export default App;
 // export default App;
 
 
-// [MathQuiz] - useRef, useState 연습
+
+
+
+
+
+
+
+
+
+// // [MathQuiz] - useRef , useState 연습
 
 // import React from "react";
 // import MathQuiz from "./MathQuiz";
 // import "./App.css";
 // function App(){
 
-//   return(
+//    return(
 //     <MathQuiz/>
-//   )
+//    )
+
 // }
 
 // export default App;
 
 
-// useRef() 와 useEffect() 예제 
 
+
+
+
+
+
+// // useRef() 와 useEffect() 예제 
 // import React, {useEffect, useRef} from "react";
 // import './App.css';
 
@@ -59,73 +58,68 @@ export default App;
 //   const inputRef = useRef()
 
 //   useEffect(()=>{
-//     console.log(inputRef);
+//      console.log(inputRef);
 //     inputRef.current.focus();
-//    }, []
+//    }, []  // 2. [] 의미:  웹사이트에 들어오자마자 첫화면에서 렌더링될때 id 인풋창에 포커스가 된상태로 뜨게 추가구현 
 //   )
 
 //   const loginAlert= () =>{
-//     alert('Welcome! ${inputRef.current.value}');
-//     inputRef.current.focus();
+//     alert('Welcome!');
+//     inputRef.current.focus(); // 1. useEffect()함수없이, 즉 주석처리후 useRef()만쓰면 alert팝업창 확인누른후에만 포커스발생! 
 //   }
 
 //   return(
 //    <div className="App"> 
 //      <header className="App-header">
-//         <input   ref={inputRef} type="text" placeholder="id"/>
-//         <input  type="text" placeholder="password"/>
+//         <input  ref={inputRef}  type="text" placeholder="id"/>
+//         <input   type="text" placeholder="password"/>
 //         <button onClick={loginAlert}>Login</button>
 //      </header>
 //    </div>
+//   )
+
+// }
+
+// export default App;
+
+
+
+// useEffect 예제2. 
+
+// import React from "react";
+// import Number from "./Number";
+
+// function App(){
+
+//   return(
+//     <Number/>
+//   )
+
+// }
+
+// export default App;
+
+
+
+// useEffect 예제1. 
+
+// import React from "react";
+// import UseEffect from "./UseEffect";
+
+// function App(){
+
+//   return(
+//     <UseEffect/>
 //   )
 // }
 
 // export default App;
 
 
-
-//useEffect 예제2
-
-// import './App.css';
-// import React from 'react';
-// import Number from './Number'
-
-// function App() {
-  
-//   return (
-//     <>
-//       <Number/>
-//     </>
-//   );
-// }
-
-// export default App;
-
-//UseEffect 예제1 
-
-// import './App.css';
-// import React from 'react';
-// import UseEffect from './UseEffect'
-
-// function App() {
-  
-//   return (
-//     <>
-//       <UseEffect/>
-//     </>
-//   );
-// }
-
-// export default App;
-
-
-
-// UserList 예제2 onClick 이벤트로 toggle 색상넣기 및 비구조화할당
-
+// useMemo(), useCallback(), React.memo() 예제 
 // import React,{useState, useRef, useMemo, useCallback} from "react";
 // import UserList from './UserList';
 // import ArrayAdd from './ArrayAdd';
-
 
 // function App(){
 
@@ -138,14 +132,15 @@ export default App;
 //   const{username, email} = inputs;
  
 //   const handleInputChange = useCallback( e => {
-//       // e.target은 onChange이벤트가 설정된 input태그를 가리킴
-//       const {name, value} = e.target; 
-//       setInputs({
-//         ...inputs,
-//         [name]: value 
-//       })
-//     }, [inputs]
+//           // e.target은 onChange이벤트가 설정된 input태그를 가리킴
+//           const {name, value} = e.target; 
+//           setInputs({
+//             ...inputs,
+//             [name]: value 
+//           })
+//          }, [inputs]
 //   )
+
 //   const [users, setUsers] = useState([
 //     { 
 //       id: 1,
@@ -170,39 +165,43 @@ export default App;
 
 //   const nextId =useRef(4)
 
-// useCallback 을 쓰는 이유 (= 함수 재사용관 관련!!)
-// useCallback 을 사용하지 않으면 컴포넌트가 리렌더링 될때마다, 함수들이 새로만들어짐.
-//그러나 useCallback 을 사용하게 되면 한번 만든 함수를 필요할때만 새로만들고 (재사용이 가능해진다!) - 최적화
+  // useCallback 을 쓰는 이유  (= 함수 재사용과 관련 !! )
+  // : useCallback 을 사용하지 않으면 컴포넌트가 리렌더링 될때마다, 함수들이 새로만들어짐. 
+  //  그러나 useCallback 을 사용하게 되면 한번 만든 함수를 필요할때만 새로만들고 (재사용이 가능해진다!) - 최적화
+
 //   const handleCreateClick = useCallback(
+//       ()=>{
+//           const user = {
+//             id: nextId.current,
+//             username,
+//             email
+//           }
 
-//     ()=>{
-//         const user = {
-//           id: nextId.current,
-//           username,
-//           email
-//         }
+         
+//         // setUsers([...users, user])  
+//         setUsers(users => users.concat(user))
 
-//       //setUsers([...users, user])
-//       setUsers( users => users.concat(user))
-
-//       setInputs({
-//         username: "",
-//         email: ""
-//       })  
-    
-//       nextId.current +=1;
-//     }, [username, email]
+//         setInputs({
+//             username: "",
+//             email: ""
+//         })  
+      
+//         nextId.current +=1;
+//     } , [ username, email]
 //   )
 
-//  const handleDeleteClick = useCallback (id => {
-//       setUsers(users.filter(user => user.id!==id));
-//     }, [users]
-//   )
-//  const handleToggleClick = useCallback((id) => { 
-//         setUsers(users.map( user => user.id===id?{...user, active: !user.active}:user)) 
-//     }, [users]
-//   )
+//   const handleDeleteClick = useCallback( id => {
+//               setUsers(users.filter(user => user.id!==id));
+//             }, [users]
+
+//  )
+ 
+//  const handleToggleClick = useCallback( (id) => { 
+//             setUsers(users.map( user => user.id===id?{...user, active: !user.active}:user)) 
+//              } , [users]
+//  )
 //  const count = useMemo(()=>countActiveUsers(users),[users]);
+
 //  return(
 //   <>
 //     <ArrayAdd
@@ -213,7 +212,7 @@ export default App;
 //     />
 
 //     <UserList propUsers={users} onDelete={handleDeleteClick} toggleClick={handleToggleClick}/>
-//     <div>활성사용자 수 : {count}</div>
+//     <div> 활성사용자 수 : {count} </div>
 //   </> 
 //  )
 // }
@@ -223,31 +222,31 @@ export default App;
 
 
 
-//UserList 예제2
+
 
 // import './App.css';
 // import React from "react";
 // import UserList1 from './UserList1';
  
 //  function App(){
-//   const users = [
-//     { 
-//       id: 1,
-//       username: 'user1',
-//       email: 'user1@gmail.com'
-//     },
-//     {
-//       id: 2,
-//       username: 'user2',
-//       email: 'user2@gmail.com'
+  // const users = [
+  //   { 
+  //     id: 1,
+  //     username: 'user1',
+  //     email: 'user1@gmail.com'
+  //   },
+  //   {
+  //     id: 2,
+  //     username: 'user2',
+  //     email: 'user2@gmail.com'
 
-//     },
-//     {
-//       id: 3,
-//       username: 'user3',
-//       email: 'user3@gmail.com'
-//     }
-//   ] 
+  //   },
+  //   {
+  //     id: 3,
+  //     username: 'user3',
+  //     email: 'user3@gmail.com'
+  //   }
+  // ] 
 
 //    return(
 //     <UserList1 users={users}/>
